@@ -1,0 +1,31 @@
+{
+  "name": "space-cruiser-dice-rapier",
+  "description": "Physics engines add dynamic and fun interaction to games and realtime animations. Rapier is a fast, stable physics engine built with Rust. It works well with JavaScript and Three.js.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrickabrena/space-cruiser-dice-rapier.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patrickabrena/space-cruiser-dice-rapier/issues"
+  },
+  "homepage": "https://github.com/patrickabrena/space-cruiser-dice-rapier#readme",
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "vite": "^6.2.2"
+  },
+  "dependencies": {
+    "three": "^0.174.0"
+  }
+}
