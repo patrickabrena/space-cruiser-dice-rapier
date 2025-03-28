@@ -1,10 +1,12 @@
 
 import * as THREE from "three";
   import { getBody, getMouseBall } from "./getBodies-test.js";
+  import { Pane } from 'tweakpane'; // Import in the main file
   import RAPIER from 'https://cdn.skypack.dev/@dimforge/rapier3d-compat@0.11.2';
   import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
   import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
   import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+
 
 document.addEventListener('DOMContentLoaded', async function () {
   
@@ -14,7 +16,8 @@ document.addEventListener('DOMContentLoaded', async function () {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
   camera.position.z = 5;
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  const canvas = document.querySelector("canvas.threejs")
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setSize(w, h);
   renderer.setPixelRatio(window.devicePixelRatio);
   document.body.appendChild(renderer.domElement);
@@ -31,8 +34,17 @@ document.addEventListener('DOMContentLoaded', async function () {
   composer.addPass(renderScene);
   composer.addPass(bloomPass);
 
+  // Create a Tweakpane instance in the main file
+const pane = new Pane();
+
+// Add the force slider
+let forceValue = -0.069; // Default value for force
+pane.addBinding({ force: forceValue }, 'force', { min: 0.001, max: 0.999, step: 0.001 }).on('change', (value) => {
+    forceValue = value.force;
+});
+
   // Create Bodies
-  const numBodies = 150;
+  const numBodies = 69;
   const bodies = [];
   for (let i = 0; i < numBodies; i++) {
     const body = getBody(RAPIER, world);

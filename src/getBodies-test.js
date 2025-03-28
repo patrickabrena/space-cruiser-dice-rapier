@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
+
 const loader = new GLTFLoader();
 let loadedModel = null;
 
@@ -76,6 +77,17 @@ loader.load("d12.glb", (gltf) => {
 
 const sceneMiddle = new THREE.Vector3(0, 0, 0);
 
+////Create a Tweakpane instance
+//const pane = new Tweakpane();
+//
+////Create a slider for controlling force
+//let forceValue = -0.069; // Default value for force
+//pane.addInput({ force: forceValue }, 'force', { min: 0.001, max: 0.999, step: 0.001 }).on('change', (value) => {
+//    forceValue = value.force;
+//});
+
+let forceValue = -0.069
+
 function getBody(RAPIER, world) {
     if (!loadedModel) return null; // Ensure model is loaded before creating bodies
 
@@ -102,7 +114,7 @@ function getBody(RAPIER, world) {
         let { x, y, z } = rigid.translation();
         let pos = new THREE.Vector3(x, y, z);
         let dir = pos.clone().sub(sceneMiddle).normalize();
-        rigid.addForce(dir.multiplyScalar(-0.7), true);
+        rigid.addForce(dir.multiplyScalar(forceValue), true);
         modelInstance.position.set(x, y, z);
     }
 
